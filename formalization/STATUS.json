@@ -1,0 +1,180 @@
+{
+  "request_date": "2026-09-17",
+  "artifact_kind": "ALL_SIX_TARGETS_LEAN_VERIFIED_CLEAN_BUILD_PASSED",
+  "source_manuscript": "An atomic-polynomial certificate for minimum autocorrelation",
+  "source_certificate_sha256": "e9b58a1068baa81723e55ad01640260118ce156ac23c07332cefefc46f552d79",
+  "lean_source_files": 41,
+  "lean_compiler_executed": true,
+  "lean_build_status": "PASS_CLEAN_BUILD_AND_COMPLETE_AXIOM_AUDIT",
+  "lean_check_script_exit_code": 0,
+  "lean_install_download_status": "OFFICIAL_WINDOWS_PACKAGE_INSTALLED",
+  "lean_install_download_curl_exit_code": 35,
+  "target_lean_version": "leanprover/lean4:v4.19.0",
+  "target_mathlib_tag": "v4.19.0",
+  "target_dependency_compatibility_tested": "REAL_FULL_LEAN_4_19_BUILD_AND_AUDIT_PASSED",
+  "full_main_theorem_formalized": true,
+  "main_targets_are_proposition_definitions_only": false,
+  "bernstein_leaves": 20,
+  "nonnegative_integer_coefficients": 367,
+  "python_checks": {
+    "original_exact_bernstein": "PASS_THIS_RUN",
+    "independent_symbolic_overlap_and_sturm": "PASS_THIS_RUN",
+    "generated_leaf_identity_and_cover_audit": "PASS_THIS_RUN",
+    "generated_leaf_binding_to_original_chebyshev_certificate": "PASS_THIS_RUN",
+    "single_coefficient_mutation_negative_control": "PASS_REJECTED_THIS_RUN",
+    "regeneration_source_and_leaf_hashes": "PASS_UNCHANGED_THIS_RUN"
+  },
+  "unproved_obligations": [],
+  "excluded_claims": [
+    "No formal definition of paper constant A as sSup, or proof of its equivalence to the ordinary-function witness statement",
+    "No assertion that every later theorem/corollary in the paper is formalized",
+    "No improved bound for the complete sparse ruler constant or resolution of Erdos #170",
+    "No formalization of weak-limit, Fourier or generalized difference-base corollaries"
+  ],
+  "evidence_files": [
+    "VERIFICATION_REPORT.md",
+    "lake-manifest.json",
+    "logs/current-run/dependency-revisions.json",
+    "logs/current-run",
+    "logs/current-run/20260917T041643.264777Z_serial-build.json",
+    "logs/current-run/20260917T042308.976577Z_finite-axioms.json",
+    "logs/current-run/20260917T042820.269917Z_witness-first.json",
+    "logs/current-run/20260917T042950.662237Z_overlap-fixed.json",
+    "logs/current-run/20260917T043026.317022Z_extension-fixed.json",
+    "logs/current-run/finite-axiom-parser-status.json",
+    "logs/current-run/20260917T043233.389605Z_serial-build.json",
+    "logs/current-run/20260917T043609.661078Z_lake-build-first-complete.json",
+    "logs/current-run/20260917T043613.789909Z_all-core-axioms.json",
+    "logs/current-run/20260917T043637.696480Z_regeneration-final.json",
+    "logs/current-run/20260917T043638.831853Z_dependency-final.json",
+    "logs/current-run/regeneration-check.json",
+    "logs/current-run/dependency-final-check.json",
+    "logs/current-run/20260917T043659.9394903Z_clean-check.json",
+    "logs/current-run/20260917T043704.221553Z_serial-build.json",
+    "logs/lean-build.log",
+    "logs/lean-axioms.log",
+    "logs/lean-axiom-status.json",
+    "logs/current-run/specification-check.json"
+  ],
+  "actual_lean_version": "4.19.0",
+  "actual_lean_commit": "6caaee842e94",
+  "actual_lake_version": "5.0.0-6caaee8",
+  "actual_mathlib_commit": "c44e0c8ee63ca166450922a373c7409c5d26b00b",
+  "current_run_log_dir": "logs/current-run",
+  "lean_kernel_verified_component_theorems_this_run_minimum": 25,
+  "finite_certificate_axiom_audit_status": "PASS_STANDARD_AXIOMS_ONLY",
+  "witness_admissibility_status": "PROVED_COMPILED_STANDARD_AXIOMS_ONLY",
+  "snapshot_evidence": "logs/current-run/20260917T043659.9394903Z_clean-check.json",
+  "proved_analysis_targets": {
+    "OverlapIntegralClaim": {
+      "theorem": "Autocorrelation.overlap_integral",
+      "compiled": true,
+      "axiom_audit": "PASS",
+      "actual_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "original_claim_type_checked": true
+    },
+    "WitnessAdmissibilityClaim": {
+      "theorem": "Autocorrelation.witness_admissibility",
+      "compiled": true,
+      "axiom_audit": "PASS",
+      "actual_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "original_claim_type_checked": true
+    },
+    "MassIntegralClaim": {
+      "theorem": "Autocorrelation.mass_integral",
+      "compiled": true,
+      "axiom_audit": "PASS",
+      "actual_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "original_claim_type_checked": true
+    },
+    "UniformCorrelationClaim": {
+      "theorem": "Autocorrelation.uniform_correlation",
+      "compiled": true,
+      "axiom_audit": "PASS",
+      "actual_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "original_claim_type_checked": true
+    },
+    "ExplicitMainClaim": {
+      "theorem": "Autocorrelation.explicit_main",
+      "compiled": true,
+      "axiom_audit": "PASS",
+      "actual_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "original_claim_type_checked": true
+    },
+    "LimitingMainClaim": {
+      "theorem": "Autocorrelation.limiting_main",
+      "compiled": true,
+      "axiom_audit": "PASS",
+      "actual_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "original_claim_type_checked": true
+    }
+  },
+  "analysis_target_status": {
+    "OverlapIntegralClaim": "PROVED_COMPILED_STANDARD_AXIOMS_ONLY",
+    "WitnessAdmissibilityClaim": "PROVED_COMPILED_STANDARD_AXIOMS_ONLY",
+    "MassIntegralClaim": "PROVED_COMPILED_STANDARD_AXIOMS_ONLY",
+    "UniformCorrelationClaim": "PROVED_COMPILED_STANDARD_AXIOMS_ONLY",
+    "ExplicitMainClaim": "PROVED_COMPILED_STANDARD_AXIOMS_ONLY",
+    "LimitingMainClaim": "PROVED_COMPILED_STANDARD_AXIOMS_ONLY"
+  },
+  "finite_certificate_audited_theorems": [
+    "Autocorrelation.finite_certificate",
+    "Autocorrelation.P_matches_paper",
+    "Autocorrelation.DRR_identity",
+    "Autocorrelation.g0_expansion",
+    "Autocorrelation.g1_expansion",
+    "Autocorrelation.g2_expansion",
+    "Autocorrelation.g3_expansion"
+  ],
+  "allowed_axioms": [
+    "propext",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "full_main_axiom_audit_status": "PASS_25_THEOREMS_STANDARD_AXIOMS_ONLY",
+  "clean_rebuild_status": "PASS",
+  "lean_full_build_exit_code": 0,
+  "lean_full_audit_exit_code": 0,
+  "formalized_main_scope": "EXPLICIT_ORDINARY_FUNCTION_AND_ARBITRARY_Q_BELOW_LIMITING_RATIO_WITNESSES",
+  "paper_entirely_formalized": false,
+  "paper_A_sSup_defined": false,
+  "paper_A_sSup_equivalence_formalized": false,
+  "clean_rebuild_evidence": "logs/current-run/20260917T043659.9394903Z_clean-check.json",
+  "original_claim_type_ascriptions_passed": true,
+  "all_core_theorems_imported": true,
+  "dependency_final_check_passed": true,
+  "dependency_packages_verified": 9,
+  "generator_synchronized": true,
+  "regeneration_check_passed": true,
+  "regeneration_changed_artifacts": [],
+  "regeneration_comparison_scope": "All existing Autocorrelation/**/*.lean and bernstein_leaves.json",
+  "remaining_blockers": [],
+  "verification_finished_utc": "2026-09-17T04:46:29.6279984Z",
+  "specification_source_check_passed": true,
+  "original_specification_definitions_unchanged": 12,
+  "certificate_bytes_unchanged": true
+}

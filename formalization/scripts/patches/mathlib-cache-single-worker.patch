@@ -1,0 +1,13 @@
+diff --git a/Cache/IO.lean b/Cache/IO.lean
+index 324c79e..bd3b6b2 100644
+--- a/Cache/IO.lean
++++ b/Cache/IO.lean
+@@ -369,7 +369,7 @@ def unpackCache (hashMap : ModuleHashMap) (force : Bool) : CacheM Unit := do
+   if size > 0 then
+     let now ← IO.monoMsNow
+     IO.println s!"Decompressing {size} file(s)"
+-    let args := (if force then #["-f"] else #[]) ++ #["-x", "--delete-corrupted", "-j", "-"]
++    let args := (if force then #["-f"] else #[]) ++ #["--jobs", "1", "-x", "--delete-corrupted", "-j", "-"]
+     let child ← IO.Process.spawn { cmd := ← getLeanTar, args, stdin := .piped }
+     let (stdin, child) ← child.takeStdin
+     /-

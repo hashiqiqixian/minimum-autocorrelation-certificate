@@ -1,0 +1,361 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern,amsmath,amssymb,amsthm,booktabs,microtype}
+\usepackage[margin=26mm]{geometry}
+\usepackage{xurl}
+\usepackage[hidelinks]{hyperref}
+\usepackage{enumitem}
+\usepackage{listings}
+\setlist{nosep}
+\setlength{\parskip}{4pt}
+\setlength{\parindent}{0pt}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{remark}\newtheorem{remark}[theorem]{Remark}
+\newcommand{\R}{\mathbb R}
+\newcommand{\Z}{\mathbb Z}
+\newcommand{\ind}{\mathbf 1}
+\newcommand{\corr}{\star}
+\newcommand{\mass}{\lVert\mu\rVert}
+\title{An atomic--polynomial certificate for minimum autocorrelation}
+\author{}\date{}
+\begin{document}
+\maketitle
+\vspace{-12mm}
+\begin{abstract}
+An explicit nonnegative, bounded, compactly supported function proves that the minimum-autocorrelation constant is greater than $0.4103779$. The construction is obtained from a point mass and a monotone polynomial density, and its correctness reduces to four rational polynomial inequalities. These inequalities are certified by exact Bernstein subdivision; separate exact overlap integration and Sturm root counts provide an independent audit. A limiting family gives the stronger rational bound $\mathcal A\ge 0.41037797743212148\ldots$. The associated continuous relaxation of complete sparse rulers admits squared mass less than $2.436778$. This is a result about an auxiliary extremal problem and a limitation of that relaxation, not an improved bound for the complete sparse ruler constant or a solution to Erd\H{o}s Problem 170.
+\end{abstract}
+
+\section{The extremal quantities and the scope of the result}
+For a nonnegative integrable function, write
+\[
+ a_f(t)=\int_{\R}f(x)f(x+t)\,dx,
+ \qquad
+ \mathcal A=\sup_{0\ne f\in L^1(\R),\ f\ge0}
+ \frac{\inf_{0\le t\le1}a_f(t)}{\left(\int_{\R}f\right)^2}.
+\]
+The function constructed below belongs to $L^1\cap L^2$ and has continuous autocorrelation, so no distinction between an ordinary and an essential infimum arises for the witness.
+
+Barnard and Steinerberger established a lower bound greater than $0.37$ and the universal upper bound
+\[
+ \mathcal A\le\frac1{2(1+\theta_0)}
+ =0.410767488189405\ldots,
+ \qquad \theta_0=-\inf_{u\in\R}\frac{\sin u}{u}.
+\]
+The value at $u=0$ is understood by continuity. Their paper also connects the question to difference bases.\footnote{R. C. Barnard and S. Steinerberger, \emph{Three convolution inequalities on the real line with connections to additive combinatorics}, J. Number Theory 207 (2020), 42--55, Theorem 2; \url{https://arxiv.org/abs/1903.08731}.}
+Madrid and Ramos developed the positive-measure formulation and proved a strict improvement of the classical upper bound under additional tightness hypotheses. No explicit numerical improvement from their argument is needed here.\footnote{J. Madrid and J. P. G. Ramos, \emph{On optimal autocorrelation inequalities on the real line}, arXiv:2003.06962v2 (2020), Theorem 1.7 and Corollary 1.8; \url{https://arxiv.org/abs/2003.06962}.}
+
+A public 2026 exact-certificate note by Kevin Russell gives
+\[
+ \mathcal A\ge\frac{2378625}{5958277}=0.39921356\ldots.
+\]
+The construction below exceeds that explicitly located comparison bound. This comparison is not a claim of exhaustive bibliographic priority.\footnote{K. Russell, \emph{A certified lower bound for the minimum-autocorrelation constant}, public research note and certificate, 2026; \url{https://github.com/techno-optimist/minimum-autocorrelation-bound}; archive DOI \href{https://doi.org/10.5281/zenodo.21227361}{10.5281/zenodo.21227361}.}
+
+The complete sparse ruler question is different. If $M(L)$ is the least cardinality of $A\subseteq\{0,\ldots,L\}$ with every distance $1,\ldots,L$ represented, its asymptotic constant is
+\[
+ c=\lim_{L\to\infty}\frac{M(L)}{\sqrt L}.
+\]
+The present construction is not a family of such integer sets. In particular, an upper bound for the mass of a feasible continuous density cannot be substituted for an upper bound on $c$. The 2026 account of Saarela and Vanhatalo gives a self-contained treatment of the ruler problem and the Wichmann upper bound.\footnote{A. Saarela and A. Vanhatalo, \emph{A Connection Between Unbordered Partial Words and Sparse Rulers}, Electronic Journal of Combinatorics 33(1) (2026), P1.40, Definitions 8--10 and Theorem 20; \url{https://www.combinatorics.org/ojs/index.php/eljc/article/download/v33i1p40/pdf/}.}
+
+\section{An exact polynomial profile}
+Every terminating decimal in this section denotes the exact rational number, not a floating-point approximation. Set
+\begin{align*}
+ a&=0.626600210121, & b&=0.160189995012,\\
+ c_0&=1-b, & w&=1-2b, & \gamma&=0.99999999.
+\end{align*}
+The symbol $c_0$ is a breakpoint, not the sparse ruler constant $c$. In particular,
+\[
+ 0<b<w<c_0<1.
+\]
+Let $T_j$ be the Chebyshev polynomial defined by
+\[
+ T_0(z)=1,\quad T_1(z)=z,\quad T_{j+1}(z)=2zT_j(z)-T_{j-1}(z).
+\]
+Define the degree-ten polynomial
+\begin{equation}\label{eq:P}
+ P(s)=2s-s^2+s(1-s)^2\sum_{j=0}^7 q_jT_j(2s-1),
+\end{equation}
+where the eight exact coefficients are as follows.
+\begin{center}
+\begin{tabular}{cr@{\qquad}cr}
+\toprule
+$j$ & $q_j$ & $j$ & $q_j$\\
+\midrule
+0 & $-0.423577846263$ & 4 & $0.000203543244$\\
+1 & $ 0.290387575223$ & 5 & $0.000666727048$\\
+2 & $ 0.011765259840$ & 6 & $0.000240602158$\\
+3 & $-0.005796017613$ & 7 & $0.000112563884$\\
+\bottomrule
+\end{tabular}
+\end{center}
+The factors in \eqref{eq:P} enforce $P(0)=0$, $P(1)=1$, and $P'(1)=0$ exactly. The certificate also proves $P'(s)\ge0$ on $[0,1]$. Consequently $0\le P(s)\le1$ on this interval.
+
+Introduce the unit-height profile
+\begin{equation}\label{eq:phi}
+ \phi(x)=\begin{cases}
+ 0,&x<b,\\
+ P((x-b)/w),&b\le x\le c_0,\\
+ 1,&c_0<x\le1,\\
+ 0,&x>1.
+ \end{cases}
+\end{equation}
+Put $h=\phi/a$ and consider the positive measure
+\begin{equation}\label{eq:mu}
+ \mu=a\delta_0+h(x)\,dx.
+\end{equation}
+This intermediate measure is supported on $[0,1]$. It is not itself an admissible $L^1$ function; Section~\ref{sec:function} explicitly removes the atom.
+
+For $0<t<1$, the absolutely continuous part of the autocorrelation of \eqref{eq:mu} has density
+\begin{equation}\label{eq:g}
+ g(t)=a h(t)+\int_\R h(x)h(x+t)\,dx
+     =\phi(t)+\frac{B(t)}{a^2},
+ \qquad B(t)=\int_\R\phi(x)\phi(x+t)\,dx.
+\end{equation}
+There is also the nonnegative atom $a^2\delta_0$. The central finite claim is
+\begin{equation}\label{eq:core}
+ g(t)\ge\gamma\qquad(0\le t\le1),
+\end{equation}
+where $g$ is extended continuously to the endpoints. The following section gives all the algebra needed to verify this claim.
+
+\section{Reduction to four polynomial inequalities}
+Let
+\[
+ I(z)=\int_0^zP(s)\,ds,\qquad
+ u(t)=1-\frac t w,\qquad v(t)=\frac{c_0-t}{w},
+\]
+and define a polynomial in $t$ by
+\[
+ H(t)=w\int_0^{u(t)}P(s)P(s+t/w)\,ds.
+\]
+Although the displayed integral makes sense algebraically for every $t$, it is used as an overlap integral only on $0\le t\le w$. Directly splitting the overlap into ramp--ramp, ramp--plateau, and plateau--plateau terms yields
+\begin{equation}\label{eq:B}
+ B(t)=\begin{cases}
+ H(t)+w\bigl(I(1)-I(u(t))\bigr)+b-t,&0\le t\le b,\\
+ H(t)+w\bigl(I(v(t))-I(u(t))\bigr),&b\le t\le w,\\
+ w I(v(t)),&w\le t\le c_0,\\
+ 0,&c_0\le t\le1.
+ \end{cases}
+\end{equation}
+The degrees in the first two pieces are at most $21$, and the third degree is at most $11$.
+
+For completeness, the ramp--ramp integration variable ranges from $x=b$ to $x=c_0-t$, which becomes $s\in[0,u(t)]$. For the ramp--plateau term it ranges from $\max(b,c_0-t)$ to $\min(c_0,1-t)$. The plateau--plateau overlap has length $(b-t)_+$. These descriptions establish \eqref{eq:B} independently of any numerical fitting procedure.
+
+The atom contribution in \eqref{eq:g} equals $0$ on $[0,b]$, $P((t-b)/w)$ on $[b,c_0]$, and $1$ on $[c_0,1]$. Combining this observation with \eqref{eq:B} gives four explicitly specified rational polynomials $g_0,g_1,g_2,g_3$. Their formulas agree at the three internal breakpoints.
+
+\begin{lemma}[Finite certificate]\label{lem:cert}
+For the exact data in Section 2, $P'\ge0$ on $[0,1]$ and $g_i-\gamma\ge0$ throughout the respective intervals in \eqref{eq:B}.
+\end{lemma}
+\begin{proof}[Computer-assisted proof]
+For a polynomial $p$ on $[\ell,r]$, expand
+\[
+ p(\ell+(r-\ell)s)
+ =\sum_{k=0}^d\beta_k\binom dk s^k(1-s)^{d-k}.
+\]
+Every term in the Bernstein basis is nonnegative on $[0,1]$. Thus nonnegative rational coefficients $\beta_k$ certify nonnegativity of the polynomial on the whole interval, not just at sampled points.
+
+If the ordinary power coefficients of the polynomial after this affine change are $p_j$, then the exact conversion formula is
+\[
+ \beta_k=\sum_{j=0}^k p_j\frac{\binom kj}{\binom dj}.
+\]
+When necessary, halve the interval by de Casteljau subdivision and apply the same test on the children. All operations are rational additions, products, and divisions.
+
+The supplied program \texttt{verify.py} obtains the following complete successful check. Depth is measured relative to the interval in the first column.
+\begin{center}
+\begin{tabular}{lrrr}
+\toprule
+Polynomial and interval & Degree & Accepted leaves & Maximum depth\\
+\midrule
+$P'$ on $[0,1]$ &9&1&0\\
+$g_0-\gamma$ on $[0,b]$ &21&1&0\\
+$g_1-\gamma$ on $[b,w]$ &21&13&6\\
+$g_2-\gamma$ on $[w,c_0]$ &11&4&3\\
+$g_3-\gamma$ on $[c_0,1]$ &0&1&0\\
+\bottomrule
+\end{tabular}
+\end{center}
+Every accepted leaf has nonnegative Bernstein coefficients. No numerical tolerance appears in this acceptance test.
+
+As an independent algebraic check, \texttt{independent\_audit.py} builds all pairwise overlap integrals using symbolic polynomial integration and compares the resulting coefficients over $\mathbb Q$ with \eqref{eq:B}. It then uses exact Sturm counts, rather than Bernstein subdivision: each $g_i-\gamma$ has positive endpoint values and zero real roots on its interval. For monotonicity it factors $P'(s)=(1-s)Q(s)$ and checks positive endpoint values and zero roots of $Q$ on $[0,1]$. Both checks succeed for the supplied data.
+\end{proof}
+
+This is a finite exact-arithmetic certificate, not a proof of optimality of the profile. The numerical optimization used to discover the data is logically unnecessary once the rational coefficients are fixed.
+
+\section{An ordinary integrable witness}\label{sec:function}
+The atom in \eqref{eq:mu} can be replaced without losing the uniform correlation lower bound. For $\delta>0$, extend $h$ by its final height:
+\[
+ h_\delta(x)=\begin{cases}
+ h(x),&0\le x\le1,\\
+ 1/a,&1<x\le1+\delta,\\
+ 0,&\text{otherwise},
+ \end{cases}
+\]
+and define
+\begin{equation}\label{eq:F}
+ F_\delta(x)=\frac a\delta\ind_{[0,\delta]}(x)+h_\delta(x).
+\end{equation}
+Each $F_\delta$ is a nonnegative, bounded, compactly supported ordinary function. In particular it belongs to $L^1(\R)\cap L^2(\R)$.
+
+\begin{lemma}[One-sided atom removal]\label{lem:removal}
+For every $\delta>0$, $a_{F_\delta}(t)\ge\gamma$ for every $t\in[0,1]$.
+\end{lemma}
+\begin{proof}
+The function $h_\delta$ is nondecreasing on $[0,1+\delta]$. For $0<t<1$, one of the cross terms in the autocorrelation of \eqref{eq:F} satisfies
+\[
+ \frac a\delta\int_0^\delta h_\delta(x+t)\,dx\ge a h(t).
+\]
+Moreover $h_\delta\ge h$ pointwise and both are nonnegative, so
+\[
+ \int_\R h_\delta(x)h_\delta(x+t)\,dx
+ \ge\int_\R h(x)h(x+t)\,dx.
+\]
+The other cross term and the narrow rectangle's own autocorrelation are nonnegative. Adding the displayed inequalities and invoking Lemma~\ref{lem:cert} gives the result on $(0,1)$. Since $F_\delta\in L^2$, its autocorrelation is continuous, so the inequality also holds at $0$ and $1$.
+\end{proof}
+
+The mass of the intermediate measure is the exact rational number
+\begin{equation}\label{eq:mass}
+ m=a+\frac{wI(1)+b}{a}=1.561018228470523\ldots,
+\end{equation}
+and $\int F_\delta=m+\delta/a$. Therefore
+\begin{equation}\label{eq:ratio}
+ \frac{\inf_{0\le t\le1}a_{F_\delta}(t)}{(\int F_\delta)^2}
+ \ge \frac\gamma{(m+\delta/a)^2}.
+\end{equation}
+
+\begin{theorem}\label{thm:main}
+Let
+\begin{align*}
+ N&=4713977940944586245580976375978623597750000000000000000,\\
+ D&=11486917427785951575611071745219515905862879073559791929.
+\end{align*}
+Then
+\[
+ \mathcal A\ge \frac ND
+ =0.4103779774321214877852987\ldots>0.4103779.
+\]
+A single explicit witness is $F_{10^{-10}}$. Set
+\[
+ D_F=11486917430134691792906455293684961315501879073559791929.
+\]
+Its ratio is at least
+\[
+ \frac{N}{D_F}=0.4103779773482111379678143\ldots.
+\]
+\end{theorem}
+\begin{proof}
+The second statement is the exact rational evaluation of \eqref{eq:ratio} at $\delta=10^{-10}$. The first follows from \eqref{eq:ratio} by allowing $\delta\downarrow0$ and using the definition of a supremum. The relation $\gamma/m^2=N/D$ and the strict comparison with $4103779/10^7$ are checked as rational identities and integer inequalities by the verifier.
+\end{proof}
+
+The first displayed value is a limiting lower bound for a supremum; it is not claimed to be attained by the measure $\mu$ in the original function problem. The second bound removes even that limiting step by giving a particular admissible $L^1$ function.
+
+\section{The connection with complete sparse rulers}
+Define the continuous relaxation
+\begin{equation}\label{eq:relax}
+ B_* =\inf\left\{\nu([0,1])^2:
+ \nu\ge0,\ \operatorname{supp}\nu\subseteq[0,1],\
+ \nu*\widetilde\nu\ge\ind_{[-1,1]}(t)\,dt\right\},
+\end{equation}
+where $\widetilde\nu(E)=\nu(-E)$. The inequality is an inequality of positive measures, not a pointwise statement at a single endpoint.
+
+\begin{proposition}\label{prop:ruler}
+The complete sparse ruler constant satisfies $c^2\ge B_*$. The explicit measure constructed above gives
+\[
+ B_*\le\frac{m^2}{\gamma}
+ =2.4367779339850293520112621\ldots<2.436778.
+\]
+\end{proposition}
+\begin{proof}
+Let $A_L\subseteq\{0,\ldots,L\}$ be complete rulers and suppose $|A_L|/\sqrt L$ converges along a subsequence to a finite value $s$. Form
+\[
+ \nu_L=\frac1{\sqrt L}\sum_{a\in A_L}\delta_{a/L}.
+\]
+These measures have uniformly bounded mass and compact support. Along a further subsequence they converge weakly to a positive measure $\nu$ supported on $[0,1]$, with mass $s$. Completeness implies
+\[
+ \nu_L*\widetilde\nu_L
+ \ge\frac1L\sum_{\substack{-L\le d\le L\\d\ne0}}\delta_{d/L}.
+\]
+The right side converges weakly to Lebesgue measure restricted to $[-1,1]$. Products of weakly convergent finite measures on compact spaces also converge weakly, so the left side tends to $\nu*\widetilde\nu$. Testing against nonnegative continuous functions gives the required domination. Hence $s^2\ge B_*$, and in particular $c^2\ge B_*$.
+
+Conversely, Lemma~\ref{lem:cert} and symmetry of autocorrelation show that $\mu*\widetilde\mu\ge\gamma\ind_{[-1,1]}dt$. Thus $\nu=\mu/\sqrt\gamma$ is feasible in \eqref{eq:relax}, with squared mass $m^2/\gamma$. The asserted exact value follows from Theorem~\ref{thm:main}.
+\end{proof}
+
+The direction of the last inequality is crucial. A feasible relaxed object gives an \emph{upper} bound on $B_*$, not an upper bound on $c^2$ and not a lower bound on $c^2$ equal to $2.436778$.
+
+For reference, the classical Fourier argument also applies directly to \eqref{eq:relax}. Write
+\[
+ \rho=\nu*\widetilde\nu-\ind_{[-1,1]}dt\ge0.
+\]
+If $\widehat\nu(\xi)=\int e^{-i\xi x}\,d\nu(x)$, then
+\[
+ 0\le|\widehat\nu(\xi)|^2
+ =2\frac{\sin\xi}{\xi}+\widehat\rho(\xi),
+ \qquad \widehat\rho(\xi)\le\rho(\R)=\nu(\R)^2-2.
+\]
+Consequently
+\[
+ B_*\ge K:=2-2\inf_{\xi\ne0}\frac{\sin\xi}{\xi}
+ =2.434467256422443\ldots.
+\]
+This identifies a narrow interval containing the optimum of this particular relaxation. It does not imply that the discrete optimum is in that interval.
+
+\begin{corollary}[A quantitative limitation of the relaxation]
+The assumptions in \eqref{eq:relax} alone cannot imply that every feasible measure has squared mass greater than $m^2/\gamma$. In particular, they cannot by themselves prove a bound such as $c^2\ge2.5$ or $c^2\ge3$ by showing $B_*\ge2.5$ or $B_*\ge3$.
+\end{corollary}
+Any such discrete lower bound must use additional information beyond positivity, support, and the weak-limit autocorrelation domination. The certificate does not rule out those stronger discrete bounds.
+
+\section{A corollary for generalized difference bases}
+For $g,N\ge1$, let $\eta_g(N)$ be the minimum cardinality of an unrestricted finite set $A\subset\Z$ for which every $1\le d\le N$ has at least $g$ ordered representations $d=a-b$. Let
+\[
+ \tau=\inf\left\{\int f:f\ge0,\ f\in L^1(\R),\ a_f(t)\ge1\ \text{for all }0\le t\le1\right\}.
+\]
+Kravitz proved the discrete--continuous identity
+\[
+ \lim_{g\to\infty}\liminf_{N\to\infty}\frac{\eta_g(N)}{\sqrt{gN}}
+ =\tau=
+ \lim_{g\to\infty}\limsup_{N\to\infty}\frac{\eta_g(N)}{\sqrt{gN}}.
+\]
+The order of limits and the unrestricted support of $A$ are part of the statement.\footnote{N. Kravitz, \emph{Generalized difference sets and autocorrelation integrals}, Acta Arithmetica 199 (2021), 199--219, Theorem 1.2; \url{https://arxiv.org/abs/2004.06611}.}
+
+Scaling $F_\delta$ by $1/\sqrt\gamma$ and then taking $\delta\downarrow0$ immediately yields the new certified comparison
+\begin{equation}\label{eq:tau}
+ \tau\le\frac m{\sqrt\gamma}
+ =1.5610182362756142228486109\ldots<1.5610183.
+\end{equation}
+Thus the same certificate has a discrete consequence for the large-multiplicity limit of generalized difference bases. It does not specialize this upper bound to $g=1$. Nor does it establish a construction with all marks in $[0,N]$; for $g>1$, that exact endpoint restriction would itself prevent $N$ from having $g$ distinct representations.
+
+\section{Reproducibility and interpretation}
+The minimal certificate consists of the ten exact parameters $a,b,q_0,\ldots,q_7$, the rational margin $\gamma$, and the rectangle width. The file \texttt{certificate.json} records these data and the exact ratios. Its SHA-256 is
+\begin{center}\small\ttfamily
+ e9b58a1068baa81723e55ad016402601\\
+ 18ce156ac23c07332cefefc46f552d79
+\end{center}
+The line break is typographical; the digest is a single 64-character hexadecimal string.
+
+Run the standard-library verifier with
+\begin{lstlisting}[basicstyle=\ttfamily\small]
+python verify.py certificate.json
+\end{lstlisting}
+It reconstructs all polynomials, proves their interval inequalities, recomputes the mass and exact ratios, and rejects any mismatch. A second audit, requiring SymPy, is
+\begin{lstlisting}[basicstyle=\ttfamily\small]
+python independent_audit.py certificate.json
+\end{lstlisting}
+It independently constructs the overlap polynomials and replaces Bernstein positivity by exact Sturm root counts. The supplied output files preserve successful runs of both programs.
+
+An earlier, separately verified witness used one atom and $16{,}384$ monotone constant-density bins. Its weaker ratio $0.410365636358034\ldots$ was verified by direct integer autocorrelation sums. The degree-ten certificate is smaller and stronger. Higher-degree numerical fits are not used in any theorem in this note.
+
+There are three logically distinct conclusions. First, the explicit function gives the exact lower bound in Theorem~\ref{thm:main}. Second, Proposition~\ref{prop:ruler} provides a quantified feasible point for the natural continuous ruler relaxation. Third, Kravitz's theorem transfers the function bound to the stated large-$g$ discrete limit. None of these conclusions determines $c$, improves the Wichmann asymptotic upper bound, or asserts global optimality of the polynomial family.
+
+The certificate has been checked by the programs described above, but it is not a proof-assistant formalization and has not undergone external peer review. Its comparison with located literature is narrower than a claim of worldwide priority.
+
+\section*{Sources}
+\small\raggedright
+\begin{enumerate}[leftmargin=*]
+\item R. C. Barnard and S. Steinerberger. \emph{Three convolution inequalities on the real line with connections to additive combinatorics}. Journal of Number Theory 207 (2020), 42--55. \url{https://arxiv.org/abs/1903.08731}. Used for the definition, classical bounds, and connection with difference bases.
+\item J. Madrid and J. P. G. Ramos. \emph{On optimal autocorrelation inequalities on the real line}. arXiv:2003.06962v2 (2020). \url{https://arxiv.org/abs/2003.06962}. Used for the positive-measure formulation and the scope of the strict upper-bound result.
+\item K. Russell. \emph{A certified lower bound for the minimum-autocorrelation constant}. Public note and exact-certificate repository (2026). \url{https://github.com/techno-optimist/minimum-autocorrelation-bound}. Archive: \url{https://doi.org/10.5281/zenodo.21227361}. Used as the explicitly located $0.39921356\ldots$ comparison; no assumption of peer-reviewed record status.
+\item A. Saarela and A. Vanhatalo. \emph{A Connection Between Unbordered Partial Words and Sparse Rulers}. Electronic Journal of Combinatorics 33(1) (2026), P1.40. \url{https://www.combinatorics.org/ojs/index.php/eljc/article/download/v33i1p40/pdf/}. Used for the original restricted problem and the Wichmann construction.
+\item N. Kravitz. \emph{Generalized difference sets and autocorrelation integrals}. Acta Arithmetica 199 (2021), 199--219. DOI: 10.4064/aa200903-12-1. \url{https://arxiv.org/abs/2004.06611}. Used for the large-multiplicity discrete--continuous correspondence.
+\end{enumerate}
+All web sources were inspected on 15 September 2026. The coefficients, certificate inequalities, exact ratios, and the stated consequences of that certificate are the results established in this note rather than quotations from those sources.
+\end{document}
